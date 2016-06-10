@@ -1,12 +1,15 @@
 $(document).ready(function(){
-
+// define some items on the DOM
 var $button = $('.start-pass');
 var $button2 = $('.guess').hide();
-var $input = $('input');
+var $input = $('input').hide();
 var $rebus = $('img');
 var $h1 = $('h1');
 var $time = $('#time').hide();
-var turn = 0
+var answer = '';
+var location = '';
+// turns, and two arrays
+var roundNo = 0
 var usedImages =[ ]
 var RebusArray =
  [
@@ -35,39 +38,31 @@ var RebusArray =
         location: "../img/06.jpg"
         },
 ];
-
+//length of the array in a varaible
 var RebusL = RebusArray.length
-
+// checks (even /odd) goes to next round, updates turn no.
 var turner = function() {
-  turn++;
-  if (turn = 0) {
+  roundNo++;
 
-  }
-  else if (turn %2 === 0) {
-    $h1.text('Player 1')
+  if (roundNo %2 === 0) {
+    $h1.text('Player 2')
 
-     $time.fadeTo('1000', 0.2);
-     $button2.show();
 
   } else {
-    $h1.text('Player 2')
+    $h1.text('Player 1')
   }
 }
-// guess text box to variable
-$button2.click(function(){
-
-  var guess = $('#guess').val();
-
-});
-
-
 // match'em or else
 var compareGuess = function(){
-  if ( guess === randomRebus.answer) {
-  alert();
-
+  console.log(answer);
+  console.log(location);
+  var guess = $('#guess').val();
+  console.log(guess);
+  // console.log(randomRedbus.answer);
+  if (guess === answer) {
+    console.log('correct!');
   } else
-console.log('loser')
+console.log('you guessed wrong')
 
 }
 
@@ -77,22 +72,36 @@ var randomNo = function () {
   return Math.floor(Math.random()*RebusL)
   }
 
-$button.click(function(){
+var randomRebus = RebusArray[randomNo()];
 
+
+//button one click  (PASS & Start)
+
+$button.click(function(){
+  console.log(RebusArray[randomNo()]);
   var randomRebus = RebusArray[randomNo()];
-  $button.text('PASS')
+  $button.text('PASS');
+  $button2.show();
+  $input.show();
+  $time.fadeTo('1000', 0.2);
   turner();
   start();
-
 $rebus.attr("src", randomRebus.location);
-
+// answer values stored in variable
   console.log(randomRebus.answer);
+  answer = randomRebus.answer;
   console.log(randomRebus.location);
-  console.log(turn);
+  location = randomRebus.location;
+  console.log(roundNo);
 
 });
+
+$button2.click(function(){
+
+compareGuess();
+});
 show()
-  compareGuess()
+
 //RebusArray[randomRebus].answer
 
 
