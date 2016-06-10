@@ -81,6 +81,7 @@ var compareGuess = function(){
     $time.fadeTo('1000', 1);
     $button.text('Next Round / P2')
     $button2.hide();
+    $input.replaceWith('<h3>'+answer+'</h3>');
 
   }
 console.log('you guessed wrong')
