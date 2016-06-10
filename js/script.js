@@ -10,6 +10,7 @@ var answer = '';
 var location = '';
 var p1Score = 0
 var p2Score = 0
+var guesses = 0
 // player turns
 var roundNo = 0
 //two arrays for images & answers, need to not repeat used items
@@ -20,39 +21,42 @@ var RebusArray =
         answer:"changing times",
         location: "../img/01.jpg"
         },
-        // {
-        // answer:"not for all the tea in china",
-        // location: "../img/02.jpg"
-        // },
-        //  {
-        // answer:"it doesn't ring a bell",
-        // location: "../img/03.jpg"
-        // },
-        //  {
-        // answer:"richard nixon",
-        // location: "../img/04.jpg"
-        // },
-        //  {
-        // answer:"not for all the tea in china",
-        // location: "../img/05.jpg"
-        // },
-        //  {
-        // answer:"take it or leave it",
-        // location: "../img/06.jpg"
-        // },
+          {
+          answer:"not for all the tea in china",
+          location: "../img/02.jpg"
+          },
+           {
+          answer:"it doesn't ring a bell",
+          location: "../img/03.jpg"
+          },
+           {
+          answer:"richard nixon",
+          location: "../img/04.jpg"
+          },
+           {
+          answer:"not for all the tea in china",
+          location: "../img/05.jpg"
+          },
+           {
+          answer:"take it or leave it",
+          location: "../img/06.jpg"
+          },
 ];
 //length of the array in a varaible
 var RebusL = RebusArray.length
 // checks (even /odd) goes to next round, updates player no.
 var turner = function() {
   roundNo++;
+  $('#wrong').text(guesses)
 
   if (roundNo %2 === 0) {
     $h1.text('Player 2')
-
-
+    reset();
+    start();
   } else {
     $h1.text('Player 1')
+      reset();
+      start();
   }
 }
 // match'em or else
@@ -66,10 +70,23 @@ var compareGuess = function(){
     console.log('correct!');
     stop()
     $time.fadeTo('1000', 1);
-    p1Score = $time.html();
+    $button.text('Next Round / P2')
+    $button2.hide()
+    p1Score += $time.text();
     console.log(p1Score);
-  } else
+    console.log(m +'sec' + s);
+  } else if (guesses === 3) {
+
+    stop()
+    $time.fadeTo('1000', 1);
+    $button.text('Next Round / P2')
+    $button2.hide();
+
+  }
 console.log('you guessed wrong')
+guesses++
+$('#wrong').text(guesses)
+
 
 }
 
@@ -108,9 +125,5 @@ $button2.click(function(){
 compareGuess();
 });
 show()
-
-//RebusArray[randomRebus].answer
-
-
 
 });
