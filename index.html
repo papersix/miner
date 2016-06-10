@@ -8,19 +8,24 @@
     <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/style.css">
   <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="js/stopwatch.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
     <div class="centered">
+
       <h1>Rebus Miner</h1>
-      <div>
-        <img src="img/IBM_Rebus.jpg" />
-      </div>
-      <div class="centered">
-        <button>Start Game</button>
-      </div>
-      <div class = "align-right">Guess:<br />
-        <input type="text" name="guess"></input>
+                 <div>
+                  <h2><span id="time"></span></h2></div>
+                 <div>
+          <img src="img/IBM_Rebus.jpg" />
+        </div>
+
+        <div class = "align-right">
+          <button class="start-pass">Start Game</button> <button class="guess">Guess</button>
+        </div>
+        <div class = "align-right">
+          <input type="text" id="guess"></input>
       </div>
 
     </div>

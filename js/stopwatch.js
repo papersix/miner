@@ -1,101 +1,98 @@
-class Stopwatch {
-    constructor(display, results) {
-        this.running = false;
-        this.display = display;
-        this.results = results;
-        this.laps = [];
-        this.reset();
-        this.print(this.times);
-    }
+//	Simple example of using private variables
+//
+//	To start the stopwatch:
+//		obj.start();
+//
+//	To get the duration in milliseconds without pausing / resuming:
+//		var	x = obj.time();
+//
+//	To pause the stopwatch:
+//		var	x = obj.stop();	// Result is duration in milliseconds
+//
+//	To resume a paused stopwatch
+//		var	x = obj.start();	// Result is duration in milliseconds
+//
+//	To reset a paused stopwatch
+//		obj.stop();
+//
+var	clsStopwatch = function() {
+		// Private vars
+		var	startAt	= 0;	// Time of last start / resume. (0 if not running)
+		var	lapTime	= 0;	// Time on the clock when last stopped in milliseconds
 
-    reset() {
-        this.times = [ 0, 0, 0];
-    }
+		var	now	= function() {
+				return (new Date()).getTime();
+			};
 
-    start() {
-        if (!this.time) this.time = performance.now();
-        if (!this.running) {
-            this.running = true;
-            requestAnimationFrame(this.step.bind(this));
-        }
-    }
+		// Public methods
+		// Start or resume
+		this.start = function() {
+				startAt	= startAt ? startAt : now();
+			};
 
-    lap() {
-        let times = this.times;
-        if (this.running) {
-            this.reset();
-        }
-        let li = document.createElement('li');
-        li.innerText = this.format(times);
-        this.results.appendChild(li);
-    }
+		// Stop or pause
+		this.stop = function() {
+				// If running, update elapsed time otherwise keep it
+				lapTime	= startAt ? lapTime + now() - startAt : lapTime;
+				startAt	= 0; // Paused
+			};
 
-    stop() {
-        this.running = false;
-        this.time = null;
-    }
+		// Reset
+		this.reset = function() {
+				lapTime = startAt = 0;
+			};
 
-    restart() {
-        if (!this.time) this.time = performance.now();
-        if (!this.running) {
-            this.running = true;
-            requestAnimationFrame(this.step.bind(this));
-        }
-        this.reset();
-    }
+		// Duration
+		this.time = function() {
+				return lapTime + (startAt ? now() - startAt : 0);
+			};
+	};
 
-    clear() {
-        clearChildren(this.results);
-    }
+var x = new clsStopwatch();
+var $time;
+var clocktimer;
 
-    step(timestamp) {
-        if (!this.running) return;
-        this.calculate(timestamp);
-        this.time = timestamp;
-        this.print();
-        requestAnimationFrame(this.step.bind(this));
-    }
-
-    calculate(timestamp) {
-        var diff = timestamp - this.time;
-        // Hundredths of a second are 100 ms
-        this.times[2] += diff / 10;
-        // Seconds are 100 hundredths of a second
-        if (this.times[2] >= 100) {
-            this.times[1] += 1;
-            this.times[2] -= 100;
-        }
-        // Minutes are 60 seconds
-        if (this.times[1] >= 60) {
-            this.times[0] += 1;
-            this.times[1] -= 60;
-        }
-    }
-
-    print() {
-        this.display.innerText = this.format(this.times);
-    }
-
-    format(times) {
-        return `\
-${pad0(times[0], 2)}:\
-${pad0(times[1], 2)}:\
-${pad0(Math.floor(times[2]), 2)}`;
-    }
+function pad(num, size) {
+	var s = "0000" + num;
+	return s.substr(s.length - size);
 }
 
-function pad0(value, count) {
-    var result = value.toString();
-    for (; result.length < count; --count)
-        result = '0' + result;
-    return result;
+function formatTime(time) {
+	var h = m = s = ms = 0;
+	var newTime = '';
+
+	h = Math.floor( time / (60 * 60 * 1000) );
+	time = time % (60 * 60 * 1000);
+	m = Math.floor( time / (60 * 1000) );
+	time = time % (60 * 1000);
+	s = Math.floor( time / 1000 );
+	ms = time % 1000;
+
+	newTime = pad(m, 2) + ':' + pad(s, 2) + ':' + pad(ms, 2);
+	return newTime;
 }
 
-function clearChildren(node) {
-    while (node.lastChild)
-        node.removeChild(node.lastChild);
+function show() {
+	$time = document.getElementById('time');
+	update();
 }
 
-let stopwatch = new Stopwatch(
-    document.querySelector('.stopwatch'),
-    document.querySelector('.results'));
+function update() {
+	$time.innerHTML = formatTime(x.time());
+}
+
+function start() {
+	clocktimer = setInterval("update()", 1);
+	x.start();
+}
+
+function stop() {
+	x.stop();
+	clearInterval(clocktimer);
+}
+
+function reset() {
+	stop();
+	x.reset();
+	update();
+}
