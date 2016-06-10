@@ -1,5 +1,5 @@
 $(document).ready(function(){
-// define some items on the DOM
+// define some items on the DOM using Jquery
 var $button = $('.start-pass');
 var $button2 = $('.guess').hide();
 var $input = $('input').hide();
@@ -8,8 +8,11 @@ var $h1 = $('h1');
 var $time = $('#time').hide();
 var answer = '';
 var location = '';
-// turns, and two arrays
+var p1Score = 0
+var p2Score = 0
+// player turns
 var roundNo = 0
+//two arrays for images & answers, need to not repeat used items
 var usedImages =[ ]
 var RebusArray =
  [
@@ -17,30 +20,30 @@ var RebusArray =
         answer:"changing times",
         location: "../img/01.jpg"
         },
-        {
-        answer:"not for all the tea in china",
-        location: "../img/02.jpg"
-        },
-         {
-        answer:"it doesn't ring a bell",
-        location: "../img/03.jpg"
-        },
-         {
-        answer:"richard nixon",
-        location: "../img/04.jpg"
-        },
-         {
-        answer:"not for all the tea in china",
-        location: "../img/05.jpg"
-        },
-         {
-        answer:"take it or leave it",
-        location: "../img/06.jpg"
-        },
+        // {
+        // answer:"not for all the tea in china",
+        // location: "../img/02.jpg"
+        // },
+        //  {
+        // answer:"it doesn't ring a bell",
+        // location: "../img/03.jpg"
+        // },
+        //  {
+        // answer:"richard nixon",
+        // location: "../img/04.jpg"
+        // },
+        //  {
+        // answer:"not for all the tea in china",
+        // location: "../img/05.jpg"
+        // },
+        //  {
+        // answer:"take it or leave it",
+        // location: "../img/06.jpg"
+        // },
 ];
 //length of the array in a varaible
 var RebusL = RebusArray.length
-// checks (even /odd) goes to next round, updates turn no.
+// checks (even /odd) goes to next round, updates player no.
 var turner = function() {
   roundNo++;
 
@@ -61,12 +64,16 @@ var compareGuess = function(){
   // console.log(randomRedbus.answer);
   if (guess === answer) {
     console.log('correct!');
+    stop()
+    $time.fadeTo('1000', 1);
+    p1Score = $time.html();
+    console.log(p1Score);
   } else
 console.log('you guessed wrong')
 
 }
 
-
+//random number function
 var randomNo = function () {
 
   return Math.floor(Math.random()*RebusL)
@@ -87,7 +94,7 @@ $button.click(function(){
   turner();
   start();
 $rebus.attr("src", randomRebus.location);
-// answer values stored in variable
+// answer values stored in variable, avoids confusion on repeatedly calling function
   console.log(randomRebus.answer);
   answer = randomRebus.answer;
   console.log(randomRebus.location);
