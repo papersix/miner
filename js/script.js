@@ -47,17 +47,23 @@ var RebusL = RebusArray.length
 // checks (even /odd) goes to next round, updates player no.
 var turner = function() {
   roundNo++;
-  $('#wrong').text(guesses)
+
 
   if (roundNo %2 === 0) {
     $h1.text('Player 2')
     reset();
     start();
+    $input.show();
+    guesses=0;
   } else {
     $h1.text('Player 1')
       reset();
       start();
+      $input.show();
+      guesses=0;
+
   }
+   $('#wrong').text(guesses)
 }
 // match'em or else
 var compareGuess = function(){
@@ -75,13 +81,18 @@ var compareGuess = function(){
     p1Score += $time.text();
     console.log(p1Score);
     console.log(m +'sec' + s);
+    $input.hide();
+
   } else if (guesses === 3) {
 
     stop()
     $time.fadeTo('1000', 1);
     $button.text('Next Round / P2')
     $button2.hide();
-    $input.replaceWith('<h3>'+answer+'</h3>');
+    $input.hide();
+    $h1.html(answer);
+
+
 
   }
 console.log('you guessed wrong')
