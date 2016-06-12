@@ -35,23 +35,23 @@ var rebusArray =
  [
           {
           answer:"changing times",
-          location: "/img/01.jpg"
+          location: "img/01.jpg"
           },
           {
           answer:"not for all the tea in china",
-          location: "/img/02.jpg"
+          location: "img/02.jpg"
           },
            {
           answer:"it doesn't ring a bell",
-          location: "/img/03.jpg"
+          location: "img/03.jpg"
           },
            {
           answer:"richard nixon",
-          location: "/img/04.jpg"
+          location: "img/04.jpg"
           },
            {
           answer:"take it or leave it",
-          location: "/img/06.jpg"
+          location: "img/06.jpg"
           },
 ];
 
