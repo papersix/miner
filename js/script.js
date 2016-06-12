@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+
 // define some items on the DOM using Jquery
 var $button = $('.start-pass');
 var $button2 = $('.guess').hide();
@@ -8,9 +10,12 @@ var $h1 = $('h1');
 var $time = $('#time').hide();
 var answer = '';
 var location = '';
-
-// var p1Score = 0
-// var p2Score = 0
+var P1totalTime = 0
+var P2totalTime = 0
+var play2
+var play1
+var p1Score = 0
+var p2Score = 0
 var guesses = 0
 // player turns
 var roundNo = 0
@@ -21,27 +26,27 @@ var usedImages =[ ]
 var rebusArray =
  [
           {
-          answer:"changing times",
+          answer:"test",
           location: "../img/01.jpg"
           },
           {
-          answer:"not for all the tea in china",
+          answer:"test",
           location: "../img/02.jpg"
           },
            {
-          answer:"it doesn't ring a bell",
+          answer:"test",
           location: "../img/03.jpg"
           },
            {
-          answer:"richard nixon",
+          answer:"test",
           location: "../img/04.jpg"
           },
            {
-          answer:"not for all the tea in china",
+          answer:"test",
           location: "../img/05.jpg"
           },
            {
-          answer:"take it or leave it",
+          answer:"test",
           location: "../img/06.jpg"
           },
 ];
@@ -51,21 +56,54 @@ var rebusArray =
 //length of the array in a varaible
 var RebusL = rebusArray.length
 
+var playerScore = function (){
+
+  if ( play2 === 'Player 2') {
+        P2totalTime += (m * 60 + s)
+        if (P2totalTime < 5) {
+
+          p2Score += 1000
+        } else if (P2totalTime < 10 ) {
+          p2Score += 500
+        } else if (P2totalTime < 20 ) {
+          p2Score += 100
+        } else {
+          P2totalTime += 10
+        }
+
+
+
+    } else {
+        P1totalTime += (m * 60 + s)
+
+if (P1totalTime < 5) {
+
+          p1Score += 1000
+        } else if (P2totalTime < 10 ) {
+          p1Score += 500
+        } else if (P2totalTime < 20 ) {
+          p1Score += 100
+        } else {
+          p1Score += 10
+        }
+
+
+
+
+    }
+}
 // match'em or else
 var compareGuess = function(){
-  console.log(answer);
-  console.log(location);
   var guess = $('#guess').val();
-  console.log(guess);
   // console.log(randomRedbus.answer);
   if (guess === answer) {
-    console.log('correct!');
     stop();
     $time.fadeTo('1000', 1);
     $button.text('Next Round / P2');
     $button2.hide();
-    console.log(m +'sec' + s);
-    var totalTime =   (m *60) + s
+    playerScore();
+
+    // var totalTime =   (m *60) + s
 
     $input.hide();
 
@@ -100,6 +138,7 @@ var turner = function() {
         start();
         $input.show();
         guesses=0;
+        // var P1totalTime += (m *60) + s
       } else {
         play1 = ('Player 1');
         playerState = 'p2'
@@ -108,6 +147,7 @@ var turner = function() {
           start();
           $input.show();
           guesses=0;
+        // var P2totalTime +=   (m *60) + s
       }
      $('#wrong').text(guesses)
 }
@@ -135,14 +175,12 @@ $button.click(function(){
   start();
 $rebus.attr("src", randomRebus.location);
 // answer values stored in variable, avoids confusion on repeatedly calling function
-  console.log(randomRebus.answer);
   answer = randomRebus.answer;
-  console.log(randomRebus.location);
   location = randomRebus.location;
   itemPlace = rebusArray.indexOf(randomRebus);
-  console.log(roundNo);
 
-  console.log(s)
+
+
 
 
   // awardPoints();
@@ -175,7 +213,17 @@ var winState = function(){
     $button2.hide();
     $input.hide();
     $rebus = $('img').hide();
-    $h1.html('Welcome to your win state');
+    console.log(P1totalTime)
+    console.log(P2totalTime)
+    if (P1totalTime > P2totalTime) {
+
+      $h1.html('Player 1 Wins' + P1totalTime);
+    } else {
+
+       $h1.html('Player 2 Wins'+ P2totalTime + P2totalTime);
+    }
+    // $h1.html('Welcome to your win state');
+
 
 }
 

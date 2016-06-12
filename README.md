@@ -6,6 +6,13 @@ A two player game to solve rebus image puzzles online sourced from the underside
 
 USER Story
 
+
+Users include all age groups that share an interest in solving visual puzzles.
+
+As a user i expect to be able to see images, 
+
+As a 
+
 Players are greeted with a screen showing the iconic IBM rebus by Designer Paul Rand.  
 
 Player clicks on “start” button which randomly loads the first bottle-cap rebus onto the screen.   A headline above the image reads player one and a  visual timer starts with a pass button, guess button, and text box appearing beneath the image.
