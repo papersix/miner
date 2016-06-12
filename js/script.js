@@ -1,3 +1,9 @@
+// miner ver01
+//Thanks to Giulia Alfonsi <electric.g@gmail.com>
+//for providing the stopwatch timer JS (stopwatch.js)
+// James & Matt of WDI Purple-Rain for some troubleshooting!
+
+
 $(document).ready(function(){
 
 
