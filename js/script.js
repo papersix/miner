@@ -13,14 +13,16 @@ var p2Score = 0
 var guesses = 0
 // player turns
 var roundNo = 0
+var pointAward =0
 //two arrays for images & answers, need to not repeat used items
+
 var usedImages =[ ]
-var RebusArray =
+var rebusArray =
  [
-        {
-        answer:"changing times",
-        location: "../img/01.jpg"
-        },
+          {
+          answer:"changing times",
+          location: "../img/01.jpg"
+          },
           {
           answer:"not for all the tea in china",
           location: "../img/02.jpg"
@@ -42,28 +44,33 @@ var RebusArray =
           location: "../img/06.jpg"
           },
 ];
+
+
+
 //length of the array in a varaible
-var RebusL = RebusArray.length
+var RebusL = rebusArray.length
 // checks (even /odd) goes to next round, updates player no.
 var turner = function() {
   roundNo++;
+  if (roundNo > RebusL) {
+    winState()
+    } else if (roundNo %2 === 0) {
+        Play2 = ('Player 2');
+        $h1.text(Play2)
+        reset();
+        start();
+        $input.show();
+        guesses=0;
+      } else {
+        Play1 = ('Player 1');
+        $h1.text(Play1)
+          reset();
+          start();
+          $input.show();
+          guesses=0;
 
-
-  if (roundNo %2 === 0) {
-    $h1.text('Player 2')
-    reset();
-    start();
-    $input.show();
-    guesses=0;
-  } else {
-    $h1.text('Player 1')
-      reset();
-      start();
-      $input.show();
-      guesses=0;
-
-  }
-   $('#wrong').text(guesses)
+      }
+     $('#wrong').text(guesses)
 }
 // match'em or else
 var compareGuess = function(){
@@ -74,10 +81,10 @@ var compareGuess = function(){
   // console.log(randomRedbus.answer);
   if (guess === answer) {
     console.log('correct!');
-    stop()
+    stop();
     $time.fadeTo('1000', 1);
-    $button.text('Next Round / P2')
-    $button2.hide()
+    $button.text('Next Round / P2');
+    $button2.hide();
     p1Score += $time.text();
     console.log(p1Score);
     console.log(m +'sec' + s);
@@ -91,16 +98,17 @@ var compareGuess = function(){
     $button2.hide();
     $input.hide();
     $h1.html(answer);
+   // trying to add slicer here
+  // splicer();
 
-
-
-  }
-console.log('you guessed wrong')
-guesses++
-$('#wrong').text(guesses)
-
-
+    // randomRebus.splice(push(usedImages), 1)[0];
+    }
+    console.log('you guessed wrong')
+    guesses++
+    $('#wrong').text(guesses)
 }
+
+
 
 //random number function
 var randomNo = function () {
@@ -108,14 +116,14 @@ var randomNo = function () {
   return Math.floor(Math.random()*RebusL)
   }
 
-var randomRebus = RebusArray[randomNo()];
+// var randomRebus = RebusArray[randomNo()];
 
 
 //button one click  (PASS & Start)
 
 $button.click(function(){
-  console.log(RebusArray[randomNo()]);
-  var randomRebus = RebusArray[randomNo()];
+
+  var randomRebus = rebusArray[randomNo()];
   $button.text('PASS');
   $button2.show();
   $input.show();
@@ -128,9 +136,60 @@ $rebus.attr("src", randomRebus.location);
   answer = randomRebus.answer;
   console.log(randomRebus.location);
   location = randomRebus.location;
+  itemPlace = rebusArray.indexOf(randomRebus);
   console.log(roundNo);
 
+  console.log(s)
+  // (m *60) + s = totalTime;
+  // awardPoints();
+
 });
+
+// pointscheme
+
+// var awardPoints = function () {
+
+
+// switch() {
+//     case 0:
+//       (totalTime < 10) {pointAward += 100};
+//       break;
+//     case 1:
+//       (totalTime < 20) {pointAward += 50};
+//       break;
+//     default:
+//       (totalTime < 20) {pointAward += 0};
+//       }
+// }
+
+
+// }
+
+var winState = function(){
+
+   stop()
+    $time.hide();
+    $button.hide()
+    $button2.hide();
+    $input.hide();
+    $rebus = $('img').hide();
+    $h1.html('Welcome to your win state');
+
+}
+
+// splicer so image
+
+// function splicer(){
+//   // var k = rebusArray.indexOf(randomRebus);
+//     if(itemPlace != -1)
+//     // rebusArray.delete(itemPlace, 1);
+//     console.log(itemPlace)
+//       console.log(itemPlace)
+//         console.log(itemPlace)
+//         rebusArray.splice(itemPlace);
+
+//   }
+
 
 $button2.click(function(){
 
