@@ -9,9 +9,27 @@ USER Story
 
 Users include all age groups that share an interest in solving visual puzzles.
 
-As a user i expect to be able to see images, 
+As a user I expect to be able to see images, solve puzzles, and have fun in a light-hearted  gaming experience.
 
-As a 
+User will expect to see a point score and winner declared
+
+Notes: "A readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc."
+
+*************
+
+Simple HTML5 Game uses jquery, some css, and javascript
+
+Special Thanks to Giulia Alfonsi <electric.g@gmail.com> for providing the stopwatch timer JS (stopwatch.js) James & Matt of WDI Purple-Rain for some troubleshooting!
+
+*********
+Unresolved Issues: 
+
+-fine-tuning of point score system
+-not repeating the random images as they are served up
+
+
+
+Walkthrough:
 
 Players are greeted with a screen showing the iconic IBM rebus by Designer Paul Rand.  
 
