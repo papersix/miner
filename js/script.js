@@ -4,6 +4,7 @@ $(document).ready(function(){
 // define some items on the DOM using Jquery
 var $button = $('.start-pass');
 var $button2 = $('.guess').hide();
+var $button3 = $('.pass').hide();
 var $input = $('input').hide();
 var $rebus = $('img');
 var $h1 = $('h1');
@@ -17,6 +18,7 @@ var play1
 var p1Score = 0
 var p2Score = 0
 var guesses = 0
+var pass
 // player turns
 var roundNo = 0
 var pointAward =0
@@ -26,27 +28,27 @@ var usedImages =[ ]
 var rebusArray =
  [
           {
-          answer:"test",
+          answer:"changing times",
           location: "../img/01.jpg"
           },
           {
-          answer:"test",
+          answer:"not for all the tea in china",
           location: "../img/02.jpg"
           },
            {
-          answer:"test",
+          answer:"it doesn't ring a bell",
           location: "../img/03.jpg"
           },
            {
-          answer:"test",
+          answer:"richard nixon",
           location: "../img/04.jpg"
           },
            {
-          answer:"test",
+          answer:"breaking bad",
           location: "../img/05.jpg"
           },
            {
-          answer:"test",
+          answer:"take it or leave it",
           location: "../img/06.jpg"
           },
 ];
@@ -72,7 +74,6 @@ var playerScore = function (){
         }
 
 
-
     } else {
         P1totalTime += (m * 60 + s)
 
@@ -86,8 +87,6 @@ if (P1totalTime < 5) {
         } else {
           p1Score += 10
         }
-
-
 
 
     }
@@ -115,6 +114,7 @@ var compareGuess = function(){
     $button2.hide();
     $input.hide();
     $h1.html(answer);
+    playerScore();
    // trying to add slicer here
   // splicer();
 
@@ -147,7 +147,7 @@ var turner = function() {
           start();
           $input.show();
           guesses=0;
-        // var P2totalTime +=   (m *60) + s
+
       }
      $('#wrong').text(guesses)
 }
@@ -173,17 +173,12 @@ $button.click(function(){
   $time.fadeTo('1000', 0.2);
   turner();
   start();
+
 $rebus.attr("src", randomRebus.location);
 // answer values stored in variable, avoids confusion on repeatedly calling function
   answer = randomRebus.answer;
   location = randomRebus.location;
   itemPlace = rebusArray.indexOf(randomRebus);
-
-
-
-
-
-  // awardPoints();
 
 });
 
@@ -215,19 +210,19 @@ var winState = function(){
     $rebus = $('img').hide();
     console.log(P1totalTime)
     console.log(P2totalTime)
-    if (P1totalTime > P2totalTime) {
+    if ( p1Score > p2Score ) {
 
-      $h1.html('Player 1 Wins' + P1totalTime);
+      $h1.html('Player 1 Wins' + ' -- ' + p1Score + ' p2 score ' + p2Score  );
     } else {
 
-       $h1.html('Player 2 Wins'+ P2totalTime + P2totalTime);
+       $h1.html('Player 2 Wins'+ ' -- ' + p2Score + ' p1 Score: ' +  p1Score  );
     }
-    // $h1.html('Welcome to your win state');
+
 
 
 }
 
-// splicer so image
+// how to get rid of selected images?? splicer so image
 
 // function splicer(){
 //   // var k = rebusArray.indexOf(randomRebus);
@@ -240,6 +235,19 @@ var winState = function(){
 
 //   }
 
+$button3.click(function(){
+$button3.hide();
+$button2.hide();
+pass = 'skipped'
+$button.show();
+
+ // stop();
+ //    $time.fadeTo('1000', 1);
+ //    $button.text('Next Round / P2');
+
+ //    playerScore();
+
+});
 
 $button2.click(function(){
 
