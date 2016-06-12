@@ -8,8 +8,9 @@ var $h1 = $('h1');
 var $time = $('#time').hide();
 var answer = '';
 var location = '';
-var p1Score = 0
-var p2Score = 0
+
+// var p1Score = 0
+// var p2Score = 0
 var guesses = 0
 // player turns
 var roundNo = 0
@@ -49,29 +50,7 @@ var rebusArray =
 
 //length of the array in a varaible
 var RebusL = rebusArray.length
-// checks (even /odd) goes to next round, updates player no.
-var turner = function() {
-  roundNo++;
-  if (roundNo > RebusL) {
-    winState()
-    } else if (roundNo %2 === 0) {
-        Play2 = ('Player 2');
-        $h1.text(Play2)
-        reset();
-        start();
-        $input.show();
-        guesses=0;
-      } else {
-        Play1 = ('Player 1');
-        $h1.text(Play1)
-          reset();
-          start();
-          $input.show();
-          guesses=0;
 
-      }
-     $('#wrong').text(guesses)
-}
 // match'em or else
 var compareGuess = function(){
   console.log(answer);
@@ -85,9 +64,9 @@ var compareGuess = function(){
     $time.fadeTo('1000', 1);
     $button.text('Next Round / P2');
     $button2.hide();
-    p1Score += $time.text();
-    console.log(p1Score);
     console.log(m +'sec' + s);
+    var totalTime =   (m *60) + s
+
     $input.hide();
 
   } else if (guesses === 3) {
@@ -108,6 +87,30 @@ var compareGuess = function(){
     $('#wrong').text(guesses)
 }
 
+// checks (even /odd) goes to next round, updates player no.
+var turner = function() {
+  roundNo++;
+  if (roundNo > RebusL) {
+    winState()
+    } else if (roundNo %2 === 0) {
+        playerState = 'p1'
+        play2 = ('Player 2');
+        $h1.text(play2)
+        reset();
+        start();
+        $input.show();
+        guesses=0;
+      } else {
+        play1 = ('Player 1');
+        playerState = 'p2'
+        $h1.text(play1)
+          reset();
+          start();
+          $input.show();
+          guesses=0;
+      }
+     $('#wrong').text(guesses)
+}
 
 
 //random number function
@@ -140,7 +143,8 @@ $rebus.attr("src", randomRebus.location);
   console.log(roundNo);
 
   console.log(s)
-  // (m *60) + s = totalTime;
+
+
   // awardPoints();
 
 });
@@ -150,18 +154,16 @@ $rebus.attr("src", randomRebus.location);
 // var awardPoints = function () {
 
 
-// switch() {
-//     case 0:
-//       (totalTime < 10) {pointAward += 100};
+// switch (totalTime) {
+//     case totalTime < 10:
+//       pointAward += 100;
 //       break;
-//     case 1:
-//       (totalTime < 20) {pointAward += 50};
+//     case totalTime < 20:
+//       pointAward += 50;
 //       break;
 //     default:
-//       (totalTime < 20) {pointAward += 0};
+//       pointAward += 0;
 //       }
-// }
-
 
 // }
 

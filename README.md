@@ -1,22 +1,20 @@
-# rebus mine
+# rebus miner
 
-USER Stories
-
-A new take on the classic minesweeper game dynamic where grids are cleared to reveal a rebus.  Players can either solve the rebus to expose the mines & win continue clicking on the grid without hitting a mine.
-
-Bonus, once mine is clicked players have time to solve the rebus & defuse the mine.
+A two player game to solve rebus image puzzles online sourced from the underside of “Lone Star” beer bottle caps.  Players take turns and have up to four attempts to solve the puzzle or give up and pass to the next player.  Points are awarded based on the length of time it takes to solve each puzzle and a summery announces the winner at the end.
 
 
-Game opens with “block text” appearing in the minefield grid
-alongside a start button.
 
-Game begins in two player mode
+USER Story
 
-A grid is randomly generated with hidden mines.  
+Players are greeted with a screen showing the iconic IBM rebus by Designer Paul Rand.  
 
-Players are asked to alternately click to reveal the grid or right-click and flag mines.
+Player clicks on “start” button which randomly loads the first bottle-cap rebus onto the screen.   A headline above the image reads player one and a  visual timer starts with a pass button, guess button, and text box appearing beneath the image.
 
-As mines are avoided and tiles on the board are clicked to reveal the rebus underneath.  Digits are revealed to show those tiles that are immediately 
+Player can make up to 4 attempts to solves the rebus by typing a guess into the input box and clicking on guess.  Incorrect guesses are logged and shown above the top image corner. The timer stops once four guesses are made, the pass button is clicked, or the correct answer is given.
 
-Players take turns clicking on the grid to expose mines and may enter the rebus solution in the provided        
-text-box at any time.
+Points are awarded depending on the time it takes to solve each rebus puzzle. 
+
+Game alternates between player one and player two until all the images are cycled.
+
+A win screen shows the point total between player one and player two and announces the winner.
+
