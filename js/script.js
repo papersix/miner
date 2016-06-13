@@ -103,6 +103,7 @@ var compareGuess = function(){
     $button.text('Next Round / P2');
     $button2.hide();
     playerScore();
+      $input = ' ';
 
     // var totalTime =   (m *60) + s
 
