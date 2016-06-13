@@ -103,7 +103,6 @@ var compareGuess = function(){
     $button.text('Next Round / P2');
     $button2.hide();
     playerScore();
-      $input = ' ';
 
     // var totalTime =   (m *60) + s
 
@@ -118,7 +117,6 @@ var compareGuess = function(){
     $input.hide();
     $h1.html(answer);
     playerScore();
-    $input = ' ';
    // trying to add slicer here
   // splicer();
 
