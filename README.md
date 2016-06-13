@@ -24,13 +24,16 @@ Player scores will be awarded to the user in relation to how long the puzzle tak
 
 User will expect to see a point score and winner declared
 
-Notes: "A readme.md file with explanations of the technologies used, the approach taken, installation instructions, unsolved problems, etc."
 
 *************
 
 Simple HTML5 Game uses jquery, some css, and javascript
 
+Use of Skeleton Responsive CSS : A dead simple, responsive boilerplate.
+
 Special Thanks to Giulia Alfonsi <electric.g@gmail.com> for providing the stopwatch timer JS (stopwatch.js) James & Matt of WDI Purple-Rain for help with  troubleshooting!
+
+
 
 *********
 Unresolved Issues: 
