@@ -214,10 +214,10 @@ var winState = function(){
     console.log(P2totalTime)
     if ( p1Score > p2Score ) {
 
-      $h1.html('Player 1 Wins' + ' <br /> ' + p1Score + '<br /> p2 score ' + p2Score  );
+      $h1.html('Player 1 Wins' + ' <br /> ' + p1Score + '<br /> p2 score<br />  ' + p2Score  );
     } else {
 
-       $h1.html('Player 2 Wins'+ ' <br /> ' + p2Score + '<br /> p1 Score: ' +  p1Score  );
+       $h1.html('Player 2 Wins'+ ' <br /> ' + p2Score + '<br /> p1 Score:<br />  ' +  p1Score  );
     }
 
 
