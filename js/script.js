@@ -117,6 +117,7 @@ var compareGuess = function(){
     $input.hide();
     $h1.html(answer);
     playerScore();
+    $input = ' ';
    // trying to add slicer here
   // splicer();
 
